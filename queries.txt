@@ -1,0 +1,40 @@
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+prefix dc: <http://purl.org/dc/terms/> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#> 
+prefix bibo: <http://purl.org/ontology/bibo/> 
+prefix foaf: <http://xmlns.com/foaf/0.1/> 
+prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> 
+prefix aiiso:<http://purl.org/vocab/aiiso/schema#>
+prefix teach:<http://linkedscience.org/teach/ns#>  
+prefix dce: <http://purl.org/dc/elements/1.1/>
+  
+SELECT ?title ?authorname1 ?authorname2 ?authorname3 ?authorname4 ?authorname5 (COUNT(?article) AS ?count ) {
+  ?article rdf:type bibo:Article .
+  ?article dc:date "2011" .
+  ?article dce:contributor ?contributors .
+  ?article dc:title ?title .
+  ?article bibo:authorList ?author1 .
+  ?author1 rdf:first ?person1 .
+  ?person1 foaf:name ?authorname1 .
+  ?author1 rdf:rest ?author2 .
+  ?author2 rdf:first ?person2 .
+  ?person2 foaf:name ?authorname2 .
+  ?author2 rdf:rest ?author3 .
+  ?author3 rdf:first ?person3 .
+  ?person3 foaf:name ?authorname3 .
+  ?author3 rdf:rest ?author4 .
+  ?author4 rdf:first ?person4 .
+  ?person4 foaf:name ?authorname4 .
+  ?author4 rdf:rest ?author5 .    
+  ?author5 rdf:first ?person5 .
+  ?person5 foaf:name ?authorname5 .
+} 
+GROUP BY ?title ?authorname1 ?authorname2 ?authorname3 ?authorname4 ?authorname5
+ORDER BY ?count
+
+
+
+ maybe use this: FILTER CONTAINS(?authorname1, ?familyname)

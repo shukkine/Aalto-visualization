@@ -1,0 +1,16 @@
+html, body {
+    height: 100%;
+}
+
+#searchResults {
+	display: none;
+}
+
+#map, #map-container {
+    height: 90%;
+}
+
+#map-canvas {
+	width: 100%;
+	height: 100%;
+}
